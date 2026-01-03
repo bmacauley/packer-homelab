@@ -1,0 +1,29 @@
+# Packer
+*.pkrvars.hcl
+!*.pkrvars.hcl.example
+packer_cache/
+*.log
+output-*/
+
+# Credentials and secrets
+*.pem
+*.key
+credentials.json
+secrets.yaml
+secrets.yml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Terraform (if used alongside)
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl

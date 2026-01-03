@@ -1,0 +1,12 @@
+[tools]
+claude = "2.0.76"
+gh = "latest"
+python = "3.13"
+uv = "latest"
+prek = "latest"
+packer = "latest"
+opentofu = "1.11.1"
+vault = "latest"
+
+[env]
+VAULT_ADDR = "http://127.0.0.1:8200"
