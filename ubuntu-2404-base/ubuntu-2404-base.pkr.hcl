@@ -138,6 +138,9 @@ source "proxmox-clone" "ubuntu-2404-base" {
   # VM Memory Settings
   memory = var.vm_memory
 
+  # QEMU Guest Agent (must be enabled for Proxmox to communicate with guest)
+  qemu_agent = true
+
   # Cloud-Init Settings
   cloud_init              = true
   cloud_init_storage_pool = var.vm_storage_pool
@@ -200,6 +203,15 @@ build {
       "",
       "# Sync filesystem",
       "sync"
+    ]
+  }
+
+  # Set cloud-init defaults on the template after build
+  post-processor "shell-local" {
+    inline = [
+      "echo 'Setting cloud-init defaults on template...'",
+      "ssh root@proxmox 'qm set ${var.vm_id} --ipconfig0 ip=dhcp'",
+      "echo 'Template ${var.vm_name} (${var.vm_id}) ready with DHCP configured'"
     ]
   }
 }
