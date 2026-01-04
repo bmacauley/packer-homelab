@@ -4,22 +4,6 @@
 # Proxmox Connection
 # =============================================================================
 
-variable "proxmox_api_url" {
-  type        = string
-  description = "Proxmox API URL (e.g., https://proxmox:8006/api2/json)"
-}
-
-variable "proxmox_api_token_id" {
-  type        = string
-  description = "Proxmox API token ID (e.g., user@pam!tokenname)"
-}
-
-variable "proxmox_api_token_secret" {
-  type        = string
-  description = "Proxmox API token secret"
-  sensitive   = true
-}
-
 variable "proxmox_tls_insecure" {
   type        = bool
   default     = true

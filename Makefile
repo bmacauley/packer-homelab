@@ -89,16 +89,6 @@ tf-output: ## Terraform output for selected layer
 	cd $(TERRAFORM_DIR)/$(TF_LAYER) && terraform output
 
 #--------------------------------------------
-# vault - set terraform credentials
-#--------------------------------------------
-
-.PHONY: vault-tf-creds
-vault-tf-creds: ## Export Vault credentials for Terraform (run with: eval $$(make vault-tf-creds))
-	@echo "export TF_VAR_proxmox_api_url=\$$(vault kv get -field=api-url kv/proxmox)"
-	@echo "export TF_VAR_proxmox_api_token_id=\$$(vault kv get -field=api-token-id kv/proxmox)"
-	@echo "export TF_VAR_proxmox_api_token_secret=\$$(vault kv get -field=api-token-secret kv/proxmox)"
-
-#--------------------------------------------
 # helpers
 #--------------------------------------------
 

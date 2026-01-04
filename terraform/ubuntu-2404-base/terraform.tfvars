@@ -1,8 +1,5 @@
 # Default values for test VM
-# Credentials should be set via environment variables:
-#   export TF_VAR_proxmox_api_url=$(vault kv get -field=api-url kv/proxmox)
-#   export TF_VAR_proxmox_api_token_id=$(vault kv get -field=api-token-id kv/proxmox)
-#   export TF_VAR_proxmox_api_token_secret=$(vault kv get -field=api-token-secret kv/proxmox)
+# Credentials are pulled from Vault automatically
 
 proxmox_node  = "proxmox"
 template_name = "ubuntu-2404-base"

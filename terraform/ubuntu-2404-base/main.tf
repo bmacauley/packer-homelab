@@ -1,11 +1,29 @@
 # Test VM for ubuntu-2404-base template
 
+# =============================================================================
+# Providers
+# =============================================================================
+
+provider "vault" {
+  # Uses VAULT_ADDR and VAULT_TOKEN from environment
+  # VAULT_ADDR is set in mise.toml
+}
+
+data "vault_kv_secret_v2" "proxmox" {
+  mount = "kv"
+  name  = "proxmox"
+}
+
 provider "proxmox" {
-  pm_api_url          = var.proxmox_api_url
-  pm_api_token_id     = var.proxmox_api_token_id
-  pm_api_token_secret = var.proxmox_api_token_secret
+  pm_api_url          = data.vault_kv_secret_v2.proxmox.data["api-url"]
+  pm_api_token_id     = data.vault_kv_secret_v2.proxmox.data["api-token-id"]
+  pm_api_token_secret = data.vault_kv_secret_v2.proxmox.data["api-token-secret"]
   pm_tls_insecure     = var.proxmox_tls_insecure
 }
+
+# =============================================================================
+# Resources
+# =============================================================================
 
 resource "proxmox_vm_qemu" "test_vm" {
   name        = var.vm_name
