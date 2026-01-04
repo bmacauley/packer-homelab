@@ -1,6 +1,4 @@
 # Packer
-*.pkrvars.hcl
-!*.pkrvars.hcl.example
 packer_cache/
 *.log
 output-*/
