@@ -21,6 +21,9 @@ Thumbs.db
 *.swp
 *.swo
 
+# Claude Code
+.claude/settings.local.json
+
 # Terraform (if used alongside)
 .terraform/
 *.tfstate
