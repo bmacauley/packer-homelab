@@ -154,7 +154,7 @@ make clean-all   # Clean everything
 
 Includes everything from `ubuntu-2404-base`, plus:
 
-- Ansible (via pipx)
+- Ansible (ansible-core)
 - Tailscale VPN client
 - mDNS/Avahi for `.local` hostname resolution
 - Additional homelab tools (git, tmux, tree, ncdu, etc.)
