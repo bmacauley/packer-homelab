@@ -1,6 +1,4 @@
 # Packer
-*.pkrvars.hcl
-!*.pkrvars.hcl.example
 packer_cache/
 *.log
 output-*/
@@ -8,6 +6,7 @@ output-*/
 # Credentials and secrets
 *.pem
 *.key
+*.pkrvars.hcl
 credentials.json
 secrets.yaml
 secrets.yml

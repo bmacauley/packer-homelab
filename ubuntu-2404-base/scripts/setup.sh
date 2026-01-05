@@ -45,4 +45,16 @@ apt-get -y install \
     dnsutils \
     jq
 
+# Configure serial console for Proxmox
+echo "==> Configuring serial console..."
+
+# Add serial console to GRUB
+if ! grep -q "console=ttyS0" /etc/default/grub; then
+    sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="[^"]*/& console=tty1 console=ttyS0,115200/' /etc/default/grub
+    update-grub
+fi
+
+# Enable serial getty
+systemctl enable serial-getty@ttyS0.service
+
 echo "==> Base template setup complete!"
