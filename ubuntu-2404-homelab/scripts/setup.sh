@@ -45,6 +45,11 @@ apt-get -y install \
     iotop \
     sysstat
 
+# Install Ansible via apt (system-wide)
+echo "==> Installing Ansible..."
+wait_for_apt
+apt-get -y install ansible
+
 # Configure timezone
 echo "==> Setting timezone to UTC..."
 timedatectl set-timezone UTC
