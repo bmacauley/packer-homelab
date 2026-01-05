@@ -145,19 +145,49 @@ make clean-all   # Clean everything
 
 ### ubuntu-2404-base
 
-- QEMU Guest Agent (for Proxmox integration)
-- Serial console support (for `qm terminal` access)
-- Common utilities: curl, wget, vim, htop, jq, etc.
+Built from `ubuntu-2404-raw`, adds:
+
+**Packages:**
+| Package | Purpose |
+|---------|---------|
+| qemu-guest-agent | Proxmox integration (required) |
+| ca-certificates | SSL/TLS certificates |
+| curl | HTTP client |
+| wget | File downloader |
+| gnupg | GPG encryption |
+| vim | Text editor |
+| htop | Process viewer |
+| net-tools | Network utilities (ifconfig, etc.) |
+| dnsutils | DNS tools (dig, nslookup) |
+| jq | JSON processor |
+
+**Configuration:**
+- Serial console enabled (`console=ttyS0,115200`)
 - Cloud-init ready
 
 ### ubuntu-2404-homelab
 
-Includes everything from `ubuntu-2404-base`, plus:
+Built from `ubuntu-2404-base`, adds:
 
-- Ansible
-- Tailscale VPN client
-- mDNS/Avahi for `.local` hostname resolution
-- Additional homelab tools (git, tmux, tree, ncdu, etc.)
+**Packages:**
+| Package | Purpose |
+|---------|---------|
+| ansible | Configuration management |
+| avahi-daemon | mDNS/Bonjour (`.local` resolution) |
+| avahi-utils | mDNS utilities |
+| tailscale | VPN mesh network |
+| git | Version control |
+| unzip | Archive extraction |
+| rsync | File synchronization |
+| tmux | Terminal multiplexer |
+| tree | Directory listing |
+| ncdu | Disk usage analyzer |
+| iotop | I/O monitor |
+| sysstat | System statistics |
+
+**Configuration:**
+- Timezone set to UTC
+- NTP enabled (systemd-timesyncd)
 
 ## Test VMs
 
