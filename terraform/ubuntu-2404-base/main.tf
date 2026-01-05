@@ -32,8 +32,11 @@ resource "proxmox_vm_qemu" "test_vm" {
   vmid        = var.vm_id
 
   # CPU
-  cores   = var.cores
-  sockets = 1
+  cpu {
+    cores   = var.cores
+    sockets = 1
+    type    = "host"
+  }
 
   # Memory
   memory = var.memory
