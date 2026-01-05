@@ -172,6 +172,19 @@ Each test VM includes:
 - Cloud-init password for console login
 - DHCP networking
 
+## VM ID Namespace
+
+VM IDs are organized into ranges to avoid conflicts:
+
+| Range | Purpose | Current Allocations |
+|-------|---------|---------------------|
+| 100-899 | Production VMs | - |
+| 900-999 | Test VMs (Terraform) | 998: test-ubuntu-2404-homelab, 999: test-ubuntu-2404 |
+| 9000-9099 | Packer templates | 9001: ubuntu-2404-base, 9002: ubuntu-2404-homelab |
+| 9100-9199 | Ansible base images | 9000: ubuntu-2404-raw |
+
+When adding new templates or test VMs, allocate IDs from the appropriate range.
+
 ## Credentials
 
 Proxmox credentials are stored in HashiCorp Vault and retrieved automatically by both Packer and Terraform.
