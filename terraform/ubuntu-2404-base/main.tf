@@ -28,8 +28,17 @@ provider "proxmox" {
 resource "proxmox_vm_qemu" "test_vm" {
   name        = var.vm_name
   target_node = var.proxmox_node
-  clone       = var.template_name
-  vmid        = var.vm_id
+  desc        = "Test VM for ubuntu-2404-base template"
+  tags        = "terraform,test"
+
+  # Clone from template
+  clone      = var.template_name
+  full_clone = true
+  vmid       = var.vm_id
+
+  # OS type (l26 = Linux 2.6+ kernel)
+  qemu_os = "l26"
+  os_type = "cloud-init"
 
   # CPU
   cpu {
@@ -37,9 +46,14 @@ resource "proxmox_vm_qemu" "test_vm" {
     sockets = 1
     type    = "host"
   }
+  numa = false
 
   # Memory
-  memory = var.memory
+  memory  = var.memory
+  balloon = 0
+
+  # BIOS
+  bios = "seabios"
 
   # QEMU Guest Agent
   agent = 1
@@ -50,28 +64,49 @@ resource "proxmox_vm_qemu" "test_vm" {
     type = "socket"
   }
 
-  # Network
-  network {
-    id     = 0
-    model  = "virtio"
-    bridge = "vmbr0"
+  # Display
+  vga {
+    type = "std"
   }
 
-  # Cloud-Init
-  os_type   = "cloud-init"
-  ipconfig0 = "ip=dhcp"
+  # Network
+  network {
+    id       = 0
+    model    = "virtio"
+    bridge   = "vmbr0"
+    firewall = false
+  }
 
-  # Disk
-  scsihw = "virtio-scsi-single"
+  # SCSI controller
+  scsihw = "virtio-scsi-pci"
 
+  # Disks
   disks {
     scsi {
       scsi0 {
         disk {
+          storage    = var.storage
+          size       = var.disk_size
+          discard    = true
+          emulatessd = true
+          iothread   = true
+        }
+      }
+    }
+    ide {
+      ide2 {
+        cloudinit {
           storage = var.storage
-          size    = var.disk_size
         }
       }
     }
   }
+
+  # Cloud-Init
+  ipconfig0 = "ip=dhcp"
+  ciuser    = "ubuntu"
+
+  # Boot and startup
+  onboot   = false
+  vm_state = "running"
 }
