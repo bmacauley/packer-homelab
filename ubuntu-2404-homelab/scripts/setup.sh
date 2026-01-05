@@ -45,12 +45,10 @@ apt-get -y install \
     iotop \
     sysstat
 
-# Install Ansible
+# Install Ansible via apt (system-wide)
 echo "==> Installing Ansible..."
 wait_for_apt
-apt-get -y install pipx
-pipx ensurepath
-pipx install --include-deps ansible
+apt-get -y install ansible-core
 
 # Configure timezone
 echo "==> Setting timezone to UTC..."
