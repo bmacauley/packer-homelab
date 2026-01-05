@@ -53,6 +53,14 @@ The overarching goals:
 ### Required Behaviors
 - Preserve all directory and naming conventions.
 
+### Testing Requirements
+- **Always test changes end-to-end**, not just superficially
+- For Makefiles: run the actual targets (e.g., `make plan`, `make apply`), not just `make help`
+- For Terraform: run `terraform init` and `terraform plan` to verify configuration is valid
+- For Packer: run `packer validate` to verify templates
+- Don't assume something works because it looks correct - verify it actually executes successfully
+- If a test fails, fix the issue before considering the task complete
+
 
 ## Makefile Conventions
 
