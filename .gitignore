@@ -6,6 +6,7 @@ output-*/
 # Credentials and secrets
 *.pem
 *.key
+*.pkrvars.hcl
 credentials.json
 secrets.yaml
 secrets.yml
