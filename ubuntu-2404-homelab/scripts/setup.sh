@@ -48,7 +48,7 @@ apt-get -y install \
 # Install Ansible via apt (system-wide)
 echo "==> Installing Ansible..."
 wait_for_apt
-apt-get -y install ansible-core
+apt-get -y install ansible
 
 # Configure timezone
 echo "==> Setting timezone to UTC..."
