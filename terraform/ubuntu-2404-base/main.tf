@@ -50,6 +50,13 @@ resource "proxmox_vm_qemu" "test_vm" {
     type = "socket"
   }
 
+  # Network
+  network {
+    id     = 0
+    model  = "virtio"
+    bridge = "vmbr0"
+  }
+
   # Cloud-Init
   os_type   = "cloud-init"
   ipconfig0 = "ip=dhcp"
