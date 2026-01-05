@@ -41,6 +41,12 @@ resource "proxmox_vm_qemu" "test_vm" {
   # QEMU Guest Agent
   agent = 1
 
+  # Serial console
+  serial {
+    id   = 0
+    type = "socket"
+  }
+
   # Cloud-Init
   os_type   = "cloud-init"
   ipconfig0 = "ip=dhcp"
