@@ -9,3 +9,7 @@ cores         = 2
 memory        = 2048
 storage       = "local-lvm"
 disk_size     = "10G"
+
+# Cloud-Init
+ci_user     = "ubuntu"
+ci_password = "password"

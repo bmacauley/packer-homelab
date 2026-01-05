@@ -58,6 +58,22 @@ variable "storage" {
 
 variable "disk_size" {
   type        = string
-  default     = "10G"
+  default     = "8G"
   description = "Disk size for the VM"
+}
+
+# =============================================================================
+# Cloud-Init
+# =============================================================================
+
+variable "ci_user" {
+  type        = string
+  default     = "ubuntu"
+  description = "Cloud-init user"
+}
+
+variable "ci_password" {
+  type        = string
+  sensitive   = true
+  description = "Cloud-init password for console access"
 }

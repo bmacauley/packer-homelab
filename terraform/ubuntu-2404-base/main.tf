@@ -28,7 +28,7 @@ provider "proxmox" {
 resource "proxmox_vm_qemu" "test_vm" {
   name        = var.vm_name
   target_node = var.proxmox_node
-  desc        = "Test VM for ubuntu-2404-base template"
+  description = "Test VM for ubuntu-2404-base template"
   tags        = "terraform,test"
 
   # Clone from template
@@ -46,7 +46,6 @@ resource "proxmox_vm_qemu" "test_vm" {
     sockets = 1
     type    = "host"
   }
-  numa = false
 
   # Memory
   memory  = var.memory
@@ -103,10 +102,11 @@ resource "proxmox_vm_qemu" "test_vm" {
   }
 
   # Cloud-Init
-  ipconfig0 = "ip=dhcp"
-  ciuser    = "ubuntu"
+  ipconfig0  = "ip=dhcp"
+  ciuser     = var.ci_user
+  cipassword = var.ci_password
 
   # Boot and startup
-  onboot   = false
-  vm_state = "running"
+  start_at_node_boot = false
+  vm_state           = "running"
 }
